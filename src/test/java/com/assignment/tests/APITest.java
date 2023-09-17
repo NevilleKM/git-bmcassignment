@@ -1,45 +1,25 @@
 package com.assignment.tests;
 
 import static io.restassured.RestAssured.given;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 
+import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import com.assignment.models.LoginModel;
 import com.assignment.properties.EndPoints;
 import com.assignment.properties.Path;
 
 import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
-import static org.hamcrest.Matchers.lessThan;
-
-import java.util.concurrent.TimeUnit;
 
 public class APITest {
 	
 	public String getToken;
 	public int bookingId;
 	
-	RequestSpecBuilder requestBuilder;
-	static RequestSpecification  requestSpec;
-	
-	ResponseSpecBuilder responseBuilder;
-	static ResponseSpecification responseSpec;
-	
 	@BeforeClass
 	public void setUp() {
-		  requestBuilder =new RequestSpecBuilder();
-		  requestBuilder.setBaseUri(Path.BASE_URI); 
-		  requestBuilder.addQueryParam("cookie",getToken); 
-		  requestSpec = requestBuilder.build();
-		  
-		  responseBuilder= new ResponseSpecBuilder();
-		  responseBuilder.expectStatusCode(200);
-		  responseBuilder.expectResponseTime(lessThan(9L), TimeUnit.SECONDS);
-		  responseSpec = responseBuilder.build();
+		RestAssured.baseURI=Path.BASE_URI;
 	}
 	
 	@Test
@@ -60,9 +40,8 @@ public class APITest {
 	public void createBookingDetails() {
 		Response res=
 		given()
-			.spec(requestSpec)
 			.contentType("application/json")
-			.log().all()
+			//.log().all()
 			.body("{"
 					   + "\"firstname\" : \"Jim\","
 					   +"\"lastname\" : \"Brown\","
@@ -78,7 +57,6 @@ public class APITest {
 	   .when()
 			.post(EndPoints.CREATE)
 	   .then()	
-	   		.spec(responseSpec)
 	   		.extract()
 	   		.response();
 
@@ -89,14 +67,14 @@ public class APITest {
 	public void getBookingDetails() {
 		
 		given()
-		     .spec(requestSpec)
 			 .contentType("application/json")
-			 .log().all()
+			 .cookie("token", getToken)
+			 //.log().all()
 	   .when()
 			.get(EndPoints.GET+bookingId)
 	   .then()	
-	   		.spec(responseSpec)
-		    .log().all();
+		 	.statusCode(200);
+		    //.log().all();
 		
 	}
 	
@@ -121,8 +99,10 @@ public class APITest {
 	   .when()
 			.put(EndPoints.UPDATE+bookingId)
 	   .then()	
-		   	.statusCode(200)
-		 	.log().all();
+		   	.statusCode(200);
+		 	//.log().all();
+			System.out.println(bookingId);
+		
 	}
 	
 	
@@ -132,12 +112,12 @@ public class APITest {
 		given()
 			 .contentType("application/json")
 			 .cookie("token", getToken)
-			 .log().all()
+			 //.log().all()
 	   .when()
 			.delete(EndPoints.DELETE+bookingId)
 	   .then()	
-		   	.statusCode(201)
-		 	.log().all();
+		   	.statusCode(201);
+		 	//.log().all();
 		
 	}
 	

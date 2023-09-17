@@ -3,16 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.assignment.tests.APITesting">
+      <class name="com.assignment.tests.APITest">
         <methods>
-          <include name="setUp"/>
-          <include name="getBookingDetails"/>
           <include name="createBookingDetails"/>
-          <include name="deleteBookingDetails"/>
           <include name="generateToken"/>
           <include name="updateBookingDetails"/>
+          <include name="deleteBookingDetails"/>
+          <include name="getBookingDetails"/>
+          <include name="setUp"/>
         </methods>
-      </class> <!-- com.assignment.tests.APITesting -->
+      </class> <!-- com.assignment.tests.APITest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
