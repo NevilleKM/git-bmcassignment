@@ -93,6 +93,7 @@ public class UIFrameworkTest extends BaseTest {
 		String itemInWishList=amazonPage.getWishList();
 		String hyperlinkText =amazonPage.getHyperlinkText();
 		getdriver().get(hyperlinkText);
+		Thread.sleep(5000);
 		
 		amazonPage.addToWishList();
 		Thread.sleep(5000);	
@@ -101,9 +102,6 @@ public class UIFrameworkTest extends BaseTest {
 		String itemToCompare=amazonPage.getWishListProduct();
 		
 		Assert.assertEquals(itemInWishList, itemToCompare);
-		
-		
-		
 
 	}
 

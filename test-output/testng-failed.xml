@@ -3,14 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.assignment.tests.UIFrameworkTest">
+      <class name="com.assignment.tests.APITesting">
         <methods>
-          <include name="testAmazonFunctionality"/>
-          <include name="setupApplication"/>
           <include name="setUp"/>
-          <include name="getdriver"/>
+          <include name="getBookingDetails"/>
+          <include name="createBookingDetails"/>
+          <include name="deleteBookingDetails"/>
+          <include name="generateToken"/>
+          <include name="updateBookingDetails"/>
         </methods>
-      </class> <!-- com.assignment.tests.UIFrameworkTest -->
+      </class> <!-- com.assignment.tests.APITesting -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
